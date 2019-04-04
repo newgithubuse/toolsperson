@@ -17,8 +17,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
+            $table->tinyInteger('gender')->default(0)->comment('0 =>  女性, 1=> 男性');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('phone');
+            $table->tinyInteger('status')->default(1)->comment('0 => 停用, 1 => 正常');
             $table->rememberToken();
             $table->timestamps();
         });
