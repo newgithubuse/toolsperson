@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserObjects extends Migration
+class CreateUserPostEvents extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateUserObjects extends Migration
      */
     public function up()
     {
-        Schema::create('user_objects', function (Blueprint $table) {
+        Schema::create('user_post_events', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->default(0);
             $table->string('title')->default('');
             $table->string('text')->default('');
             $table->string('img')->default('');
@@ -32,6 +33,6 @@ class CreateUserObjects extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_objects');
+        Schema::dropIfExists('user_post_events');
     }
 }
