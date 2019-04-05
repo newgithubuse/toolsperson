@@ -14,7 +14,7 @@ export default [
             {
                 path: '/register',
                 name: 'register',
-                component: require('@/components/home/register.vue').default,
+                component: require('@/components/home/Register.vue').default,
                 meta: { requireAuth: true }
             },
             {
