@@ -9,6 +9,10 @@ return [
         'submit' => [
             'success' => '刊登成功',
             'failed' =>  '刊登失敗', 
+        ],
+        'get' => [
+            'success' => '取得成功',
+            'failed' => '取得失敗',
         ]
     ],
     'auth' => [
@@ -19,6 +23,12 @@ return [
         'logout' => [
             'success' => '登出成功',
             'failed' => '登出失敗',
+        ]
+    ],
+    'public' => [
+        'get' => [
+            'success' => '取得成功',
+            'failed' => '取得失敗',
         ]
     ]
 ];

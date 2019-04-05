@@ -58,5 +58,19 @@ class UserController
 			$this->response->setInfo('FAILED', config('responsecode.user.submit.failed'), trans('responsecode.user.submit.failed') );
 		}
 		return $this->response->failed();
-    }
+	}
+	
+	public function getPostEvent(Request $request)
+	{
+		try {
+			$user = User::where('email', $request->email)->first();
+			$result = UserPostEvent::where('user_id', $user->id)->get();	
+			$this->response->setInfo('SUCCESS', config('responsecode.user.get.success'), trans('responsecode.user.get.success') );
+			return $this->response->success($result);			
+		} catch(Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.user.get.failed'), trans('responsecode.user.get.failed') );
+		}
+		return $this->response->failed();
+	}
 }
