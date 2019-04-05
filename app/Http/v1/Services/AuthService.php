@@ -3,6 +3,7 @@ namespace App\Http\v1\Services;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Exceptions\AuthException;
 use App\Repository\UserRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -28,9 +29,9 @@ class AuthService
     {    
 		$user = User::where('email', $request->email)->first();
 		if (!$user) {
-			return response()->json(['message' => '帳號或密碼輸入錯誤!'], 422);
+			throw new AuthException(trans('responsecode.auth.login.authfailed'), config('responsecode.auth.login.authfailed'));			
 		} else if (! Hash::check($request->password, $user->password)) {
-			return response()->json(['message' => '帳號或密碼輸入錯誤!'], 422);
+			throw new AuthException(trans('responsecode.auth.login.authfailed'), config('responsecode.auth.login.authfailed'));
 		}
 		
 		$client = DB::table('oauth_clients')->where('password_client', true)->first();

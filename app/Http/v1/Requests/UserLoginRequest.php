@@ -8,8 +8,8 @@ class UserLoginRequest extends Request
     public function __construct()
     {
         $this->from = "USER_LOGIN";
-        $this->code = config('responsecode.user.login.failed');
-        $this->msg = trans('responsecode.user.login.failed');
+        $this->code = config('responsecode.auth.login.failed');
+        $this->msg = trans('responsecode.auth.login.failed');
     }
     public function authorize()
     {

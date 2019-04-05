@@ -5,16 +5,15 @@
   >
     <Navbar></Navbar>
     <div class="row">
-      <div class="col-lg-1 col-sm-0">
-      </div>
-      <div class="col-lg-10 col-sm-12">
-        <Carousel></Carousel>
-        <div class="row mb">
-          <div class="col-12 wantdoit">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-0 col-lg-2"></div>
+          <div class="col-12 col-lg-8">
             <transition name="fade">
               <router-view></router-view>
             </transition>
           </div>
+          <div class="col-0 col-lg-2"></div>
         </div>
       </div>
     </div>
@@ -26,19 +25,15 @@
     >
       <p>↑</p>
     </div>
-    <Sideleft></Sideleft>
   </div>
 </template>
 <script>
   import Vue from "vue";
   import Sideleft from "@/components/home/Sideleft.vue";
   import Navbar from "@/components/home/Navbar.vue";
-  import Carousel from "@/components/home/Carousel.vue";
   export default {
     components: {
-      Sideleft,
-      Navbar,
-      Carousel
+      Navbar
     },
     data() {
       return {
@@ -48,7 +43,6 @@
     },
     methods: {
       gotop() {
-        // console.log('gotop!')
         let speed = 10;
         let timer = setInterval(function() {
           this.scrollTop =
@@ -70,8 +64,6 @@
           document.documentElement.scrollTop ||
           window.pageYOffset ||
           document.body.scrollTop;
-        // console.log(document.documentElement.scrollTop);
-        // console.log(window.pageYOffset);
         if (this.scrollTop > 200) {
           this.goTop = true;
         } else {

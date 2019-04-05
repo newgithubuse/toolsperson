@@ -19,6 +19,7 @@ return [
         'login' => [
             'success' => '登入成功',
             'failed' => '登入失敗',
+            'authfailed' => '帳號或密碼輸入錯誤!',
         ],
         'logout' => [
             'success' => '登出成功',

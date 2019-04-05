@@ -30,9 +30,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    let loginstatus = window.localStorage.getItem('loginstatus')
-    console.log('loginstatus : ' + loginstatus)
-    if (loginstatus) {
+    let token = window.localStorage.getItem('token')
+    if (token) {
         next()
     } else {
         if (to.meta.requireAuth) {
