@@ -9,6 +9,10 @@ return [
         'submit' => [
             'success' => 1,
             'failed' => -1,            
+        ],
+        'get' => [
+            'success' => 1,
+            'failed' => -1,
         ]
     ],
     'auth' => [
@@ -17,6 +21,12 @@ return [
             'failed' => -1,
         ],
         'logout' => [
+            'success' => 1,
+            'failed' => -1,
+        ]
+    ],
+    'public' => [
+        'get' => [
             'success' => 1,
             'failed' => -1,
         ]
