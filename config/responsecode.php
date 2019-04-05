@@ -19,6 +19,7 @@ return [
         'login' => [
             'success' => 1,
             'failed' => -1,
+            'authfailed' => -2,
         ],
         'logout' => [
             'success' => 1,

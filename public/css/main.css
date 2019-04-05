@@ -1,0 +1,42 @@
+.mb {
+  margin-bottom: 20px;
+}
+
+.dropdown-menu {
+  left: -100px;
+}
+
+.gotop {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  right: 5px;
+  bottom: 5px;
+  background: #259485;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: 0.5s;
+}
+
+.topblock {
+  opacity: 1;
+}
+
+.item:hover {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 1280px) {
+  .gotop {
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    right: 25px;
+    bottom: 25px;
+  }
+}
+

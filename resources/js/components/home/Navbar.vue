@@ -4,7 +4,6 @@
       class="navbar navbar-expand-lg navbar-dark bg-dark"
       style="width: 100%;"
     >
-      <!-- <a class="navbar-brand" href="#"><img src="https://picsum.photos/200/50/?random=100" alt="logo">&nbsp;&nbsp;&nbsp;校園工具人派遣</a> -->
       <router-link
         to="/"
         class="navbar-brand"
@@ -30,22 +29,29 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <router-link
+              v-show="havetoken"
               class="nav-link"
-              to="/register"              
+              to="/register"
             >註冊</router-link>
           </li>
-          <li class="nav-item active">
-            <a
+          <li class="nav-item">
+            <router-link
+              v-show="havetoken"
               class="nav-link"
-              href="#"
-            >登入/登出<span class="sr-only">(current)</span></a>
+              to="/login"
+            >登入</router-link>
           </li>
           <li class="nav-item">
-            <!-- <a class="nav-link" href="#">我要刊登</a> -->
-            <router-link
-              to="/submit"
+            <a
+              href="#"
               class="nav-link"
-            >我要刊登</router-link>
+            >刊登辦法</a>
+          </li>
+          <li class="nav-item">
+            <a
+              href="#"
+              class="nav-link"
+            >聯絡我們</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -57,20 +63,16 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              幫助
+              個人資料
             </a>
             <div
               class="dropdown-menu"
               aria-labelledby="navbarDropdown"
             >
-              <a
+              <router-link
+                to="/submit"
                 class="dropdown-item"
-                href="#"
-              >聯絡我們</a>
-              <a
-                class="dropdown-item"
-                href="#"
-              >刊登辦法</a>
+              >我要刊登</router-link>
               <div class="dropdown-divider"></div>
               <a
                 class="dropdown-item"
@@ -87,9 +89,24 @@
 <script>
   import { router } from "@/main.js";
   export default {
+    data() {
+      return {
+        token: window.localStorage.getItem("token")
+      };
+    },
+    computed: {
+      havetoken() {
+        if (this.token) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    },
     methods: {
       logout() {
-        window.localStorage.removeItem("loginstatus");
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("user");
         this.$router.push("/login");
       }
     }

@@ -1,87 +1,67 @@
 <template>
-  <el-container>
-    <el-header>校園工具人派遣</el-header>
-    <el-main>
-      <div class="logintitle">coming soon. . .</div>
-      <div class="login">
-        <div class="logincontent">帳號</div>
-        <div class="logincontent">
-          <el-input
-            v-model="account"
-            placeholder="請輸入帳號"
-          ></el-input>
-        </div>
-        <div class="logincontent">密碼</div>
-        <div class="logincontent">
-          <el-input
-            placeholder="請輸入密碼"
-            v-model="password"
-            show-password
-          ></el-input>
-        </div>
-        <div class="logincontent">
-          <el-button
-            type="primary"
-            @click.native="login"
-          >登入</el-button>
+  <div class="border">
+    <h1 class="displaycenter">
+      會員登入
+    </h1>
+    <div class="displaycenter">
+      <div class="form-group col-7 ">
+        <label for="email">Email address</label>
+        <input
+          class="form-control"
+          placeholder="Enter email"
+          v-model="input.email"
+        >
+      </div>
+    </div>
+
+    <div class="displaycenter mb">
+      <div class="form-group col-7">
+        <label for="Password">Password</label>
+        <input
+          class="form-control"
+          placeholder="Password"
+          type="password"
+          v-model="input.password"
+        >
+      </div>
+    </div>
+    <div class="row mb">
+      <div class="col-lg-2 col-0"></div>
+      <div class="col-lg-8 col-12">
+        <div class="row">
+          <div class="col-lg-2 col-0"></div>
+          <div class="col-lg-8 col-12">
+            <div class="row">
+              <div class="col-lg-8 col-6 displaycenter">
+                <button
+                  class="btn btn-primary width80"
+                  @click="login"
+                >登入
+                </button>
+              </div>
+              <div class="col-lg-4 col-6 displaycenter">
+                <button class="btn btn-light width80">取消
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-0"></div>
         </div>
       </div>
-    </el-main>
-    <el-footer>Copyright &copy; 2019 Apple Inc.</el-footer>
-  </el-container>
+      <div class="col-lg-2 col-0"></div>
+    </div>
+  </div>
 </template>
 <style scope>
-  html {
-    height: 100%;
+  h1 {
+    padding: 30px;
   }
-  body {
-    height: 100%;
+  .width80 {
+    width: 80%;
   }
-  #app {
-    height: 100%;
-  }
-  .el-container {
-    height: 100%;
-  }
-  .el-header {
-    font-size: 2em;
-  }
-  .el-header,
-  .el-footer {
-    background-color: rgba(0, 27, 128, 0.5);
-    color: #333;
-    text-align: center;
-    line-height: 60px;
-  }
-  .el-main {
-    position: relative;
-    background-color: #eae2d6;
-    color: #333;
-  }
-  .logintitle {
-    position: absolute;
-    left: 0;
-    right: 0;
-    margin: auto;
-    text-align: center;
-  }
-  .login {
-    z-index: 1;
-    width: 40%;
-    height: 60%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin: auto;
+  .displaycenter {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  .logincontent + .logincontent {
-    margin-top: 10px;
   }
 </style>
 <script>
@@ -90,15 +70,32 @@
   export default {
     data() {
       return {
-        account: "",
-        password: ""
+        input: {
+          email: "",
+          password: ""
+        }
       };
     },
     methods: {
       login() {
-        this.$store.dispatch("Login", true);
-        window.localStorage.setItem("loginstatus", true);
-        this.$router.push("/");
+        axios
+          .post("v1/auth/login", this.input)
+          .then(response => {
+            let res = response.data;
+            // console.log(res);
+            if (res.code == 1) {
+              window.localStorage.setItem("token", res.data.token);
+              window.localStorage.setItem("user", JSON.stringify(res.data.user));
+              this.$router.push("/search");
+            } else {
+              alert(res.msg);
+            }
+          })
+          .catch(err => {
+            console.log("post失敗");
+            console.log(err);
+          });
+        // this.$store.dispatch("Login", true);
       }
     }
   };

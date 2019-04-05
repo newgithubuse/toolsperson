@@ -4,8 +4,10 @@ namespace App\Http\v1\Controllers;
 
 use Exception;
 use Illuminate\Http\Request;
+use App\Exceptions\AuthException;
 use Illuminate\Support\Facades\DB;
 use App\Http\v1\Responses\Response;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use App\Http\v1\Services\AuthService;
 use App\Http\v1\Requests\UserLoginRequest;
@@ -30,11 +32,15 @@ class AuthController extends Controller
       
     public function login(UserLoginRequest $request)
 	{
+        Log::info('$reuqest => ' . print_r(json_encode($request->all()),true));
 		try{			
             $result = $this->authService->fetchUser($request);
 			$this->response->setInfo('SUCCESS', config('responsecode.auth.login.success'), trans('responsecode.auth.login.success') );
 			return $this->response->success($result);
-		} catch(Exception $e) {
+        } catch(AuthException $e) {
+            Log::error('error :' . $e);
+            $this->response->setInfo('FAILED', $e->getCode(), $e->getMessage());
+        } catch(Exception $e) {
 			Log::error('error :' . $e);
 			$this->response->setInfo('FAILED', config('responsecode.auth.login.failed'), trans('responsecode.auth.login.failed') );
 		}
