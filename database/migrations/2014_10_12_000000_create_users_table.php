@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('gender')->default(0)->comment('0 =>  女性, 1=> 男性');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('phone');
+            $table->string('phone')->default('');
             $table->tinyInteger('status')->default(1)->comment('0 => 停用, 1 => 正常');
             $table->rememberToken();
             $table->timestamps();
