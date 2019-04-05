@@ -4,10 +4,10 @@ namespace App\Repository;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class UserObjectRepository extends BaseRepository {
+class UserPostEventRepository extends BaseRepository {
 
     function model()
     {
-        return "App\\Models\\UserObject";
+        return "App\\Models\\UserPostEvent";
     }
 }

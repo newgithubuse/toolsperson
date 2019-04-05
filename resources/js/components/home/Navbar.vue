@@ -28,6 +28,12 @@
         id="navbarSupportedContent"
       >
         <ul class="navbar-nav">
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              to="/register"              
+            >註冊</router-link>
+          </li>
           <li class="nav-item active">
             <a
               class="nav-link"

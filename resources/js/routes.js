@@ -1,5 +1,4 @@
-export default [
-    {
+export default [{
         path: '/login',
         name: 'login',
         component: require('@/components/Login.vue').default,
@@ -10,8 +9,7 @@ export default [
         name: 'home',
         component: require('@/components/Home.vue').default,
         meta: { requireAuth: false },
-        children: [
-            {
+        children: [{
                 path: '/',
                 name: 'search',
                 component: require('@/components/home/Search.vue').default,
@@ -27,6 +25,12 @@ export default [
                 path: '/detailshow/:id',
                 name: 'detailshow',
                 component: require('@/components/home/DetailShow.vue').default,
+                meta: { requireAuth: false }
+            },
+            {
+                path: '/register',
+                name: 'register',
+                component: require('@/components/home/register.vue').default,
                 meta: { requireAuth: false }
             }
         ]

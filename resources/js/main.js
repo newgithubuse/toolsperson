@@ -9,8 +9,11 @@ import 'normalize.css'
 import ElementUi from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import moment from 'moment'
+import VeeValidate from 'vee-validate'
 
 moment.locale('zh-tw')
+
+Vue.use(VeeValidate)
 Vue.use(VueRouter)
 Vue.use(ElementUi)
 Vue.directive('scroll', {

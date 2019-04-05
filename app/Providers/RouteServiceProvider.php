@@ -38,6 +38,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+        $this->mapApiVersionRoutes('v1');
 
         //
     }
@@ -69,5 +70,15 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace('App\Http\v1\Controllers')           
              ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapApiVersionRoutes($version)
+    {
+        Route::group([           
+            'namespace'  => "App\\Http\\$version\\Controllers",
+            'prefix'     => "$version"
+        ], function ($router) use ($version) {
+            require base_path("routes/$version.php");
+        });
     }
 }
