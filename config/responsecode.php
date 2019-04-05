@@ -6,13 +6,19 @@ return [
             'failed' => -1,
             'exist' => -2,
         ],
+        'submit' => [
+            'success' => 1,
+            'failed' => -1,            
+        ]
+    ],
+    'auth' => [
         'login' => [
             'success' => 1,
             'failed' => -1,
         ],
-        'submit' => [
+        'logout' => [
             'success' => 1,
-            'failed' => -1,            
+            'failed' => -1,
         ]
     ]
 ];

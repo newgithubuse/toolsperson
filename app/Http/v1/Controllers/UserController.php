@@ -39,19 +39,6 @@ class UserController
 		return $this->response->failed();
 	}
 
-	public function login(UserLoginRequest $request)
-	{
-		try{			
-			$this->userService->valUser($request);
-			$this->response->setInfo('SUCCESS', config('responsecode.user.login.success'), trans('responsecode.user.login.success') );
-			return $this->response->success();
-		} catch(Exception $e) {
-			Log::error('error :' . $e);
-			$this->response->setInfo('FAILED', config('responsecode.user.login.failed'), trans('responsecode.user.login.failed') );
-		}
-		return $this->response->failed();
-	}
-
 	public function submitObject(UserSubmitRequest $request)
 	{
 		try {

@@ -2,88 +2,46 @@
 
 namespace App\Http\v1\Controllers;
 
-use Carbon\Carbon;
+use Exception;
 use App\Models\User;
-use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\v1\Responses\Response;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Http\v1\Services\AuthService;
+use App\Http\v1\Requests\UserLoginRequest;
 
 class AuthController extends Controller
 {
 
-    protected $http;
 
-    public function __construct()
+    public function __construct(AuthService $authService, Response $response)
     {
-        $this->http = new Client;
+        $this->authService = $authService;
+        $this->response = $response;
     }
-        /**
-     * Create user
-     *
-     * @param  [string] name
-     * @param  [string] email
-     * @param  [string] password
-     * @param  [string] password_confirmation
-     * @return [string] message
-     */
-    public function signup(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|confirmed'
-        ]);
-        $user = new User([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
-        $user->save();
-        return response()->json([
-            'message' => 'Successfully created user!'
-        ], 201);
-    }
+
   
     /**
      * Login user and create token
      *
-     * @param  [string] email
-     * @param  [string] password
-     * @param  [boolean] remember_me
-     * @return [string] access_token
-     * @return [string] token_type
-     * @return [string] expires_at
+     * @param  [string] token
+     * @param  [object] user
      */
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-            'remember_me' => 'boolean'
-        ]);
+      
+    public function login(UserLoginRequest $request)
+	{
+		try{			
+            $result = $this->authService->fetchUser($request);
+			$this->response->setInfo('SUCCESS', config('responsecode.auth.login.success'), trans('responsecode.auth.login.success') );
+			return $this->response->success($result);
+		} catch(Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.auth.login.failed'), trans('responsecode.auth.login.failed') );
+		}
+		return $this->response->failed();
+	}
 
-        $user = User::where('email', $request->email)->first();
-        if (!$user) {
-            return response()->json(['message' => '帳號或密碼輸入錯誤!'], 422);
-        } else if (! Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => '帳號或密碼輸入錯誤!'], 422);
-        }
-        
-        $client = DB::table('oauth_clients')->where('password_client', true)->first();
-        $data = [
-            'grant_type' => 'password',
-            'client_id' => $client->id,
-            'client_secret' => $client->secret,
-            'username' => $request->email,
-            'password' => $request->password,
-        ];
-        $request = Request::create('/oauth/token', 'POST', $data);
-        $token = json_decode(app()->handle($request)->getContent());
-        return response()->json(['token' => $token->access_token, 'user' => $user], 200);
-    }
   
     /**
      * Logout user (Revoke the token)
@@ -91,26 +49,17 @@ class AuthController extends Controller
      * @return [string] message
      */
     public function logout(Request $request)
-    {
-        $accessToken = auth('v1')->user()->token();
-        $refreshToken = DB::table('oauth_refresh_tokens')->where('access_token_id', $accessToken->id)->update(['revoked' => true]);
-        $accessToken->revoke();
-        return response()->json(['status' => 200]);
-    }
-  
-
-    public function getOAuthToken($username, $password)
-    {
-        $response = $this->http->post(route('passport.token'), [
-            'form_params' => [
-                'grant_type' => 'password',
-                'client_id' => '2',
-                'client_secret' => 'pKuis21anxHp8HyAcvNivPKegRYhBQSejbBpkkCw',
-                'username' => $username,
-                'password' => $password,
-                'scope' => '*',
-            ],
-        ]);
-        return json_decode((string) $response->getBody(), true);
+    {   
+        try{	            
+            $accessToken = auth('v1')->user()->token();
+            $refreshToken = DB::table('oauth_refresh_tokens')->where('access_token_id', $accessToken->id)->update(['revoked' => true]);
+            $accessToken->revoke();
+			$this->response->setInfo('SUCCESS', config('responsecode.auth.logout.success'), trans('responsecode.auth.logout.success') );
+			return $this->response->success();
+		} catch (Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.auth.logout.failed'), trans('responsecode.auth.logout.failed') );
+		}
+		return $this->response->failed();
     }
 }

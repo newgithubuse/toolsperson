@@ -34,23 +34,7 @@ class UserService
                 'password' => Hash::make($request->password),
                 'phone' => $request->phone,
         ]);
-    }
-
-    /**
-     * 使用者登入
-     *
-     * @param  mixed $request
-     *
-     * @return void
-     */
-    public function valUser($request)
-    {    
-        $user = $this->userRepository->findByField('email', $request->email)->first();
-        if(! ($user || Hash::check($request->password, $user->passowrd)) ) {
-            throw new Exception;
-        }
-        
-    }
+}
 
 
 }
