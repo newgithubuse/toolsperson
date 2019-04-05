@@ -26,8 +26,27 @@
   opacity: 1;
 }
 
-.item:hover {
+.card-img-top {
+  width: auto;
+  max-width: 100%;
+  display: block;
+  margin: auto;
+}
+
+.card-deck .card {
+  flex: 0 0 28%;
+  margin-bottom: 35px;
+  transition: 0.5s;
+}
+
+.card-footer {
+  text-align: center;
+}
+
+.card:hover {
   cursor: pointer;
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
 }
 
 @media screen and (min-width: 1280px) {

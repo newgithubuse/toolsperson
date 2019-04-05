@@ -8,7 +8,7 @@ export default [
             {
                 path: '/login',
                 name: 'login',
-                component: require('@/components/Login.vue').default,
+                component: require('@/components/home/Login.vue').default,
                 meta: { requireAuth: true }
             },
             {

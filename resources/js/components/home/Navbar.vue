@@ -5,7 +5,7 @@
       style="width: 100%;"
     >
       <router-link
-        to="/"
+        to="/search"
         class="navbar-brand"
       ><img
           src="https://picsum.photos/100/50/?random=100"
