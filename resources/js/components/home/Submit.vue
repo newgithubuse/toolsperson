@@ -1,12 +1,10 @@
 <template>
   <div>
-    <div class="row mb">
-      <div class="form-group row">
-        <label
-          for="colFormLabel"
-          class="col-sm-2 col-form-label"
-        >標題</label>
-        <div class="col-sm-10 mb">
+    <div class="border">
+      <h1 class="displaycenter">會員刊登</h1>
+      <div class="displaycenter">
+        <div class="form-group col-7 ">
+          <label for="email">標題</label>
           <input
             type="input"
             class="form-control"
@@ -15,11 +13,10 @@
             v-model.trim="input.title"
           >
         </div>
-        <label
-          for="colFormLabel"
-          class="col-sm-2 col-form-label"
-        >內容</label>
-        <div class="col-sm-10 mb">
+      </div>
+      <div class="displaycenter">
+        <div class="form-group col-7 ">
+          <label for="email">內容</label>
           <input
             type="input"
             class="form-control"
@@ -28,11 +25,10 @@
             v-model.trim="input.text"
           >
         </div>
-        <label
-          for="exampleFormControlTextarea1"
-          class="col-sm-2 col-form-label"
-        >詳細內容敘述</label>
-        <div class="col-sm-10 mb">
+      </div>
+      <div class="displaycenter">
+        <div class="form-group col-7 ">
+          <label for="email">詳細內容敘述</label>
           <textarea
             class="form-control"
             id="exampleFormControlTextarea1"
@@ -41,11 +37,10 @@
             v-model="input.detail"
           ></textarea>
         </div>
-        <label
-          for="colFormLabel"
-          class="col-sm-2 col-form-label"
-        >圖片網址</label>
-        <div class="col-sm-10 mb">
+      </div>
+      <div class="displaycenter">
+        <div class="form-group col-7 ">
+          <label for="email">圖片網址</label>
           <input
             type="input"
             class="form-control"
@@ -54,16 +49,50 @@
             v-model.trim="input.img"
           >
         </div>
-        <div class="col-sm-10">
-          <button
-            class="btn btn-primary"
-            @click="submithandler"
-          >傳送</button>
+      </div>
+      <div class="row mb">
+        <div class="col-12">
+          <div class="displaycenter">
+            <div class="col-2"></div>
+            <div class="col-8">
+              <div class="row">
+                <div class="col-6">
+                  <div class="displaycenter">
+                    <button
+                      class="btn btn-primary"
+                      @click="submithandler"
+                    >傳送</button>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="displaycenter">
+                    <button
+                      class="btn btn-light"
+                      @click="cancelhandler"
+                    >取消</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-2"></div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+<style scoped>
+  .displaycenter {
+    display: flex;
+    justify-content: center;
+  }
+  .btn-primary {
+    width: 60%;
+  }
+  .btn_light {
+    width: 80%;
+  }
+</style>
 <script>
   import store from "@/store";
   import moment from "moment";
@@ -76,7 +105,8 @@
           text: "",
           footer: "",
           createdatetime: "",
-          detail: ""
+          detail: "",
+          email: ""
         },
         loading: false
       };
@@ -85,27 +115,32 @@
       submithandler() {
         if (this.input.title && this.input.text && this.input.img) {
           this.loading = true;
-          this.input.createdatetime = moment().format("YYYYMMDD h:mm:ss a");
+
+          this.input.email = JSON.parse(
+            window.localStorage.getItem("user")
+          ).email;
+          this.input.createdatetime = moment().format("YYYY-MM-DD HH:mm:ss");
           this.input.footer = moment(
             this.input.createdatetime,
-            "YYYYMMDD h:mm:ss a"
+            "YYYYMMDD HH:mm:ss"
           ).fromNow();
           axios
-            .post("http://localhost:8888/alldata", this.input)
-            .then(res => {
-              this.cancelhandler();
-              this.loading = false;
-              this.$router.push({ path: "/" });
-              this.$store.commit("setcontents", res.data);
+            .post("v1/user/submit", this.input)
+            .then(response => {
+              let res = response.data;
+              if (res.code == 1) {
+                this.cancelhandler();
+                this.loading = false;
+                this.$store.commit("setcontents", res.data);
+                this.$router.push({ path: "/search" });
+              } else {
+                alert(res.msg);
+              }
             })
             .catch(err => {
-              console.log(this.input);
               console.log("post失敗");
               console.log(err);
-              console.log(err.message);
             });
-          // .post("http://localhost:8888/alldata", this.input)
-          // .post("/api/user/submit", this.input)
         } else {
           return;
         }
