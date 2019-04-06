@@ -22,6 +22,7 @@
           placeholder="Password"
           type="password"
           v-model="input.password"
+          @keyup.enter="login"
         >
       </div>
     </div>
