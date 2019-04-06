@@ -29,14 +29,14 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <router-link
-              v-show="login"
+              v-show="!loginstatus"
               class="nav-link"
               to="/register"
             >註冊</router-link>
           </li>
           <li class="nav-item">
             <router-link
-              v-show="login"
+              v-show="!loginstatus"
               class="nav-link"
               to="/login"
             >登入</router-link>
@@ -55,7 +55,7 @@
           </li>
           <li
             class="nav-item dropdown"
-            v-show="!login"
+            v-show="loginstatus"
           >
             <a
               class="nav-link dropdown-toggle"
@@ -96,13 +96,6 @@
     computed: {
       loginstatus() {
         return store.state.loginstatus;
-      },
-      login() {
-        if (this.loginstatus) {
-          return false;
-        } else {
-          return true;
-        }
       }
     },
     methods: {
