@@ -75,7 +75,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb">
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
         <div class="row">
@@ -110,7 +110,6 @@
 <style lang="scss" scoped>
   .border {
     box-sizing: border-box;
-    padding: 20px 30px;
   }
   .displaycenter {
     display: flex;
