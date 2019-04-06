@@ -15,6 +15,17 @@
     </div>
   </div>
 </template>
+<style>
+  .alltocenter {
+    display: flex;
+    justify-content: center;
+  }
+  .alltocentercolumn {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+</style>
 <script>
   import store from "@/store";
   export default {
