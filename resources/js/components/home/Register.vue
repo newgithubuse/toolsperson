@@ -143,7 +143,7 @@
 
   </div>
 </template>
-<style scope>
+<style scoped>
   h1 {
     padding: 30px;
   }
