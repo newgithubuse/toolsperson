@@ -53,7 +53,7 @@
     </div>
   </div>
 </template>
-<style scope>
+<style scoped>
   h1 {
     padding: 30px;
   }
@@ -83,7 +83,6 @@
           .post("v1/auth/login", this.input)
           .then(response => {
             let res = response.data;
-            // console.log(res);
             if (res.code == 1) {
               window.localStorage.setItem("token", res.data.token);
               window.localStorage.setItem("user", JSON.stringify(res.data.user));

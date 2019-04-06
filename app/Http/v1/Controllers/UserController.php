@@ -42,7 +42,7 @@ class UserController
 	public function submitObject(UserSubmitRequest $request)
 	{
 		try {
-			$user = User::where('email', $request->email)->first();
+			$user = User::where('email', $request->email)->first();	
 			UserPostEvent::create([
 				'user_id' => $user->id,
 				'title' => $request->title,

@@ -11,7 +11,7 @@ export const mutations = {
         for (i = 0; i < data.length; i++) {
             data[i].footer = moment(
                 data[i].createdatetime,
-                'YYYYMMDD h:mm:ss a'
+                'YYYY-MM-DD HH:mm:ss'
             ).fromNow()
         }
         state.contents = data.reverse()
