@@ -34,6 +34,12 @@ export default [
                 name: 'detailshow',
                 component: require('@/components/home/DetailShow.vue').default,
                 meta: { requireAuth: false }
+            },
+            {
+                path: '/profile',
+                name: 'profile',
+                component: require('@/components/home/Profile.vue').default,
+                meta: { requireAuth: false }
             }
         ]
     },

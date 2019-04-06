@@ -86,7 +86,7 @@
             if (res.code == 1) {
               window.localStorage.setItem("token", res.data.token);
               window.localStorage.setItem("user", JSON.stringify(res.data.user));
-              this.$store.dispatch("Login", true);
+              this.$store.dispatch("Login", res.data.user);
               this.$router.push("/search");
             } else {
               alert(res.msg);

@@ -66,7 +66,7 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              個人資料
+              <i class="fas fa-user-alt"></i>
             </a>
             <div
               class="dropdown-menu"
@@ -76,6 +76,10 @@
                 to="/submit"
                 class="dropdown-item"
               >我要刊登</router-link>
+              <router-link
+                to="/profile"
+                class="dropdown-item"
+              >個人資料</router-link>
               <div class="dropdown-divider"></div>
               <a
                 class="dropdown-item"
