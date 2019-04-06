@@ -165,7 +165,7 @@
           password: "",
           name: "",
           phone: "",
-          gender: []
+          gender: ""
         }
       };
     },
