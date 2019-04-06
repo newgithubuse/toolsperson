@@ -162,12 +162,24 @@
       },
       updateProfile() {
         let localUser = JSON.parse(window.localStorage.getItem("user"));
+        let oldemail = localUser.email;
         localUser.name = this.input.name;
         localUser.email = this.input.email;
         localUser.phone = this.input.phone;
-        window.localStorage.setItem("user", JSON.stringify(localUser));
-        this.$store.dispatch("updateUserProfile", localUser);
-        this.cancelmodify();
+        axios
+          .patch("v1/user/profile/update", {
+            oldemail: oldemail,
+            name: localUser.name,
+            email: localUser.email,
+            phone: localUser.phone
+          })
+          .then(res => {
+            console.log(localUser);
+            window.localStorage.setItem("user", JSON.stringify(localUser));
+            this.$store.dispatch("updateUserProfile", localUser);
+            this.cancelmodify();
+          })
+          .catch(err => {});
       }
     }
   };

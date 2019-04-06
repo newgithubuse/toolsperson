@@ -73,4 +73,17 @@ class UserController
 		}
 		return $this->response->failed();
 	}
+
+	public function update(Request $request) 
+	{
+		try {			
+			User::where('email', $request->oldemail)->firstOrFail()->update($request->only(['email',"name","phone"]));					
+			$this->response->setInfo('SUCCESS', config('responsecode.user.update.success'), trans('responsecode.user.update.success') );
+			return $this->response->success();			
+		} catch(Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.user.update.failed'), trans('responsecode.user.update.failed') );
+		}
+		return $this->response->failed();		
+	}
 }
