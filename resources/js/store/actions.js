@@ -1,6 +1,8 @@
 export const CONTENTS_READ = context => {
-    return axios.get('http://localhost:8888/alldata').then(res => {
-        context.commit('getcontents', res.data)
+    return axios.get('v1/public/get').then(response => {
+        let res = response
+        console.log(res)
+        context.commit('getcontents', res.data.data)
     })
 }
 export const Login = (context, status) => {
