@@ -2,6 +2,7 @@ import moment from 'moment'
 
 export const state = {
     contents: [],
+    user: [],
     loginstatus: false
 }
 
@@ -22,12 +23,20 @@ export const mutations = {
         state.contents = state.contents.reverse()
     },
     login(state, data) {
-        state.loginstatus = data
+        state.user = data
+        state.loginstatus = true
     },
     logout(state, data) {
-        state.loginstatus = data
+        state.user = ''
+        state.loginstatus = false
     },
     loginstatus(state, data) {
+        if (data) {
+            state.user = JSON.parse(window.localStorage.getItem('user'))
+        }
         state.loginstatus = data
+    },
+    updateuserprofile(state, data) {
+        state.user = data
     }
 }
