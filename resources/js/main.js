@@ -48,6 +48,10 @@ const app = new Vue({
     store,
     mounted() {
         this.$store.dispatch('CONTENTS_READ')
+        this.$store.dispatch(
+            'LoginStatus',
+            window.localStorage.getItem('token')
+        )
     },
     render: h => h(App)
 })

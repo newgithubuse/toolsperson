@@ -16,12 +16,11 @@
               type="email"
               class="form-control"
               placeholder="Enter email"
-              v-model="email"
-              :class="{'input': true, 'is-danger': errors.has('email') }"
+              v-model="input.email"
             >
             <div
               class="alert alert-danger"
-              v-show="errors.has('email')"
+              v-show="this.errors.has('email')"
             >
               {{ errors.first('email') }}
             </div>
@@ -29,14 +28,15 @@
         </div>
         <div class="displaycenter">
           <div class="form-group col-7">
-            <label for="Password">Password</label>
+            <label for="password">Password</label>
             <input
-              v-validate="{required : true ,alpha_num : true ,min : 8 ,max : 16}"
+              v-validate="{required : true ,alpha_num : true ,min : 6 ,max : 16}"
+              data-vv-as="password"
               name="password"
               type="password"
               class="form-control"
               placeholder="Password"
-              v-model="password"
+              v-model="input.password"
             >
             <div
               class="alert alert-danger"
@@ -48,13 +48,14 @@
         </div>
         <div class="displaycenter">
           <div class="form-group col-7">
-            <label for="Password">Password Again</label>
+            <label for="password_confirmation">Password confirmation</label>
             <input
-              v-validate="{required : true ,is : password}"
+              v-validate="{required : true ,is : input.password}"
+              data-vv-as="password_confirmation"
               name="password_confirmation"
               type="password"
               class="form-control"
-              placeholder="Password Again"
+              placeholder="Password confirmation"
             >
             <div
               class="alert alert-danger"
@@ -69,10 +70,12 @@
             <label for="name">name</label>
             <input
               v-validate="{ required: true ,min : 2, max : 10}"
+              data-vv-as="name"
               name="name"
               type="name"
               class="form-control"
-              placeholder="name"
+              placeholder="Name"
+              v-model="input.name"
             >
             <div
               class="alert alert-danger"
@@ -87,10 +90,12 @@
             <label for="phone">phone</label>
             <input
               v-validate="{ required: true ,numeric : true ,length : 10}"
+              data-vv-as="phone"
               name="phone"
               type="tel"
               class="form-control"
               placeholder="Phone"
+              v-model="input.phone"
             >
 
             <div
@@ -102,6 +107,29 @@
             <small style="color:Orange">
               ex:09xxxxxxxx
             </small>
+          </div>
+        </div>
+        <div class="displaycenter">
+          <div class="form-group col-7">
+            <label for="phone">gender</label>
+            <div>
+              <input
+                type="radio"
+                id="Female"
+                name="Female"
+                value=0
+                class="radio"
+                v-model="input.gender"
+              >&nbsp;Female
+              <input
+                type="radio"
+                id="Male"
+                name="Male"
+                value=1
+                class="radio"
+                v-model="input.gender"
+              >&nbsp;Male
+            </div>
           </div>
         </div>
         <div class="displaycenter">
@@ -123,29 +151,44 @@
     display: flex;
     justify-content: center;
   }
+  .radio + .radio {
+    margin-left: 50px;
+  }
 </style>
 
 <script>
   export default {
     data() {
       return {
-        email: "",
-        password: "",
-        name: "",
-        phone: ""
+        input: {
+          email: "",
+          password: "",
+          name: "",
+          phone: "",
+          gender: []
+        }
       };
     },
     methods: {
       validateBeforeSubmit() {
-        console.log(this.$validator);
         this.$validator.validateAll().then(result => {
-          console.log(result)
           if (result) {
-            alert("登入成功!");
-            return;
+            axios
+              .post("v1/user/registered", this.input)
+              .then(response => {
+                let res = response.data;
+                console.log(res);
+                if (res.code == 1) {
+                  alert(res.msg);
+                  this.$router.push({ path: "/login" });
+                } else {
+                  alert(res.msg);
+                }
+              })
+              .catch(err => {});
+          } else {
+            alert("請確認格式正確!");
           }
-
-          alert("請確認格式正確!");
         });
       }
     }
