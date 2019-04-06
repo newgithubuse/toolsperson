@@ -22,6 +22,7 @@
           placeholder="Password"
           type="password"
           v-model="input.password"
+          @keyup.enter="login"
         >
       </div>
     </div>
@@ -86,6 +87,7 @@
             if (res.code == 1) {
               window.localStorage.setItem("token", res.data.token);
               window.localStorage.setItem("user", JSON.stringify(res.data.user));
+              this.$store.dispatch("Login", true);
               this.$router.push("/search");
             } else {
               alert(res.msg);
@@ -95,7 +97,6 @@
             console.log("post失敗");
             console.log(err);
           });
-        // this.$store.dispatch("Login", true);
       }
     }
   };

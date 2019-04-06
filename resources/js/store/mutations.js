@@ -23,5 +23,11 @@ export const mutations = {
     },
     login(state, data) {
         state.loginstatus = data
+    },
+    logout(state, data) {
+        state.loginstatus = data
+    },
+    loginstatus(state, data) {
+        state.loginstatus = data
     }
 }

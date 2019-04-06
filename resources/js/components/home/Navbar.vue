@@ -29,14 +29,14 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <router-link
-              v-show="havetoken"
+              v-show="!loginstatus"
               class="nav-link"
               to="/register"
             >註冊</router-link>
           </li>
           <li class="nav-item">
             <router-link
-              v-show="havetoken"
+              v-show="!loginstatus"
               class="nav-link"
               to="/login"
             >登入</router-link>
@@ -53,7 +53,10 @@
               class="nav-link"
             >聯絡我們</a>
           </li>
-          <li class="nav-item dropdown">
+          <li
+            class="nav-item dropdown"
+            v-show="loginstatus"
+          >
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -87,26 +90,19 @@
   </div>
 </template>
 <script>
+  import store from "@/store/index.js";
   import { router } from "@/main.js";
   export default {
-    data() {
-      return {
-        token: window.localStorage.getItem("token")
-      };
-    },
     computed: {
-      havetoken() {
-        if (this.token) {
-          return false;
-        } else {
-          return true;
-        }
+      loginstatus() {
+        return store.state.loginstatus;
       }
     },
     methods: {
       logout() {
         window.localStorage.removeItem("token");
         window.localStorage.removeItem("user");
+        this.$store.dispatch("Logout", false);
         this.$router.push("/login");
       }
     }
