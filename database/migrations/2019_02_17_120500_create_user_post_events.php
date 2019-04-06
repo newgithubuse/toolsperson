@@ -21,7 +21,7 @@ class CreateUserPostEvents extends Migration
             $table->string('img')->default('');
             $table->string('footer')->default('');
             $table->string('detail')->default('');
-            $table->string('createdatetime')->default('');
+            $table->dateTime('createdatetime')->nullable();
             $table->timestamps();
         });
     }
