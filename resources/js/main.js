@@ -32,7 +32,11 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
     let token = window.localStorage.getItem('token')
     if (token) {
-        next()
+        if (to.name == 'home') {
+            next('/search')
+        } else {
+            next()
+        }
     } else {
         if (to.meta.requireAuth) {
             next()
