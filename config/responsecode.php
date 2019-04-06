@@ -13,6 +13,10 @@ return [
         'get' => [
             'success' => 1,
             'failed' => -1,
+        ],
+        'update' => [
+            'success' => 1,
+            'failed' => -1,
         ]
     ],
     'auth' => [
