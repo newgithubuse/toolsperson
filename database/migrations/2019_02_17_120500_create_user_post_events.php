@@ -16,6 +16,7 @@ class CreateUserPostEvents extends Migration
         Schema::create('user_post_events', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->default(0);
+            $table->string('name')->default('');
             $table->string('title')->default('');
             $table->string('text')->default('');
             $table->string('img')->default('');

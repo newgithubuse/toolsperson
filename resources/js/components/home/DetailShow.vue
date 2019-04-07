@@ -9,7 +9,7 @@
         <h2>{{content.title}}</h2>
       </div>
 
-      <div class="col-4 displayaligncenter">刊登者 :</div>
+      <div class="col-4 displayaligncenter">刊登者 : </div>
     </div>
     <div class="row mb">
       <div class="col-7 displayaligncenter">
@@ -31,7 +31,7 @@
     </div>
     <div class="row mb">
       <div class="col-12 displaycenter">
-        <buttom class="btn btn-primary">報名委託</buttom>
+        <button class="btn btn-primary">報名委託</button>
       </div>
     </div>
   </div>
@@ -63,11 +63,6 @@
 <script>
   import store from "@/store";
   export default {
-    data() {
-      return {
-        username: ""
-      };
-    },
     computed: {
       content() {
         return this.$store.state.contents.find(item => {
