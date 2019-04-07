@@ -47,6 +47,7 @@ class UserController
 			$user = User::where('email', $request->email)->firstOrFail();
 			UserPostEvent::create([
 				'user_id' => $user->id,
+				'name' => $user->name,
 				'title' => $request->title,
 				'text' => $request->text,
 				'detail' => $request->detail,
