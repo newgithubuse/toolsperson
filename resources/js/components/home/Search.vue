@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      class="row"
-      style="margin-bottom: 40px"
-    >
+    <div class="row mb displaycenter">
       <form class="form-inline my-2 my-lg-0">
         <input
           class="form-control mr-sm-2"
@@ -11,14 +8,13 @@
           placeholder="Search"
           v-model.trim="search"
         >
-        <div>正在搜尋: {{search}}</div>
       </form>
     </div>
     <div class="row mb">
       <div v-if="loading">loading......</div>
       <div
-        class="col-11"
-        style="padding: 0px"
+        class="col-12"
+        style="padding: 5px 15px"
         v-else
       >
         <div class="card-deck">
@@ -49,6 +45,13 @@
     </div>
   </div>
 </template>
+<style lang="scss" scoped>
+  .displaycenter {
+    display: flex;
+    justify-content: center;
+  }
+</style>
+
 <script>
   import store from "@/store/index.js";
   import router from "vue-router";

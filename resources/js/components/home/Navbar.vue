@@ -8,7 +8,7 @@
         to="/search"
         class="navbar-brand"
       ><img
-          src="https://picsum.photos/100/50/?random=100"
+          src="https://picsum.photos/50/50/?random=100"
           alt="logo"
         >&nbsp;&nbsp;&nbsp;校園工具人派遣</router-link>
       <button
@@ -30,11 +30,11 @@
           <li class="nav-item">
             <router-link
               v-show="!loginstatus"
-              class="nav-link"
+              class="nav-link textcenter"
               to="/register"
             >註冊</router-link>
           </li>
-          <li class="nav-item">
+          <li class="nav-item textcenter">
             <router-link
               v-show="!loginstatus"
               class="nav-link"
@@ -44,13 +44,13 @@
           <li class="nav-item">
             <a
               href="#"
-              class="nav-link"
+              class="nav-link textcenter"
             >刊登辦法</a>
           </li>
           <li class="nav-item">
             <a
               href="#"
-              class="nav-link"
+              class="nav-link textcenter"
             >聯絡我們</a>
           </li>
           <li
@@ -58,7 +58,7 @@
             v-show="loginstatus"
           >
             <a
-              class="nav-link dropdown-toggle"
+              class="nav-link dropdown-toggle textcenter"
               href="#"
               id="navbarDropdown"
               role="button"
@@ -74,19 +74,19 @@
             >
               <router-link
                 to="/submit"
-                class="dropdown-item"
+                class="dropdown-item textcenter"
               >我要刊登</router-link>
               <router-link
                 to="/profile"
-                class="dropdown-item"
+                class="dropdown-item textcenter"
               >個人資料</router-link>
               <router-link
                 to="/history"
-                class="dropdown-item"
+                class="dropdown-item textcenter"
               >刊登記錄</router-link>
               <div class="dropdown-divider"></div>
               <a
-                class="dropdown-item"
+                class="dropdown-item textcenter"
                 href="#"
                 @click='logout'
               >登出</a>
@@ -97,6 +97,12 @@
     </nav>
   </div>
 </template>
+<style lang="scss" scoped>
+  .textcenter {
+    text-align: center;
+  }
+</style>
+
 <script>
   import store from "@/store/index.js";
   import { router } from "@/main.js";
