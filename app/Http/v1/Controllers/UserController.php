@@ -14,6 +14,7 @@ use App\Http\v1\Requests\UserLoginRequest;
 use App\Http\v1\Requests\UserSubmitRequest;
 use Symfony\Component\HttpFoundation\Request;
 use App\Http\v1\Requests\UserRegisteredRequest;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class UserController
 {
@@ -42,7 +43,8 @@ class UserController
 	public function submitObject(UserSubmitRequest $request)
 	{
 		try {
-			$user = User::where('email', $request->email)->first();	
+			Log::info('$request => ' . print_r(json_encode($request->all()),true));			
+			$user = User::where('email', $request->email)->firstOrFail();
 			UserPostEvent::create([
 				'user_id' => $user->id,
 				'title' => $request->title,
@@ -53,6 +55,9 @@ class UserController
 			]);			
 			$this->response->setInfo('SUCCESS', config('responsecode.user.submit.success'), trans('responsecode.user.submit.success') );
 			return $this->response->success($request->all());			
+		} catch(ModelNotFoundException $e){
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.user.submit.notexist'), trans('responsecode.user.submit.notexist'));
 		} catch(Exception $e) {
 			Log::error('error :' . $e);
 			$this->response->setInfo('FAILED', config('responsecode.user.submit.failed'), trans('responsecode.user.submit.failed') );
@@ -63,7 +68,8 @@ class UserController
 	public function getPostEvent(Request $request)
 	{
 		try {
-			$user = User::where('email', $request->email)->first();
+			Log::info('$request => ' . print_r(json_encode($request->all()),true));
+			$user = User::where('email', $request->email)->firstOrFail();
 			$result = UserPostEvent::where('user_id', $user->id)->get();	
 			$this->response->setInfo('SUCCESS', config('responsecode.user.get.success'), trans('responsecode.user.get.success') );
 			return $this->response->success($result);			

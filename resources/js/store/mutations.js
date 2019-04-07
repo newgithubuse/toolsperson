@@ -3,6 +3,7 @@ import moment from 'moment'
 export const state = {
     contents: [],
     user: [],
+    userobject: [],
     loginstatus: false
 }
 
@@ -38,5 +39,8 @@ export const mutations = {
     },
     updateuserprofile(state, data) {
         state.user = data
+    },
+    getuserobject(state, data) {
+        state.userobject = data.reverse()
     }
 }

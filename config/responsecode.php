@@ -8,7 +8,8 @@ return [
         ],
         'submit' => [
             'success' => 1,
-            'failed' => -1,            
+            'failed' => -1,
+            'notexist' => -2,     
         ],
         'get' => [
             'success' => 1,

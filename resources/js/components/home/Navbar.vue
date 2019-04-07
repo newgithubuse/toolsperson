@@ -80,6 +80,10 @@
                 to="/profile"
                 class="dropdown-item"
               >個人資料</router-link>
+              <router-link
+                to="/history"
+                class="dropdown-item"
+              >刊登記錄</router-link>
               <div class="dropdown-divider"></div>
               <a
                 class="dropdown-item"
