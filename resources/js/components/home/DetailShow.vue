@@ -9,7 +9,7 @@
         <h2>{{content.title}}</h2>
       </div>
 
-      <div class="col-4 displayaligncenter">刊登者 : </div>
+      <div class="col-4 displayaligncenter">刊登者 : {{content.name}}</div>
     </div>
     <div class="row mb">
       <div class="col-7 displayaligncenter">
