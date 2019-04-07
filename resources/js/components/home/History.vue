@@ -9,6 +9,7 @@
           class="row item mb bottomborderstyle"
           v-for="(item,index) in userobject"
           :key=index
+          @click="itemclick(index)"
         >
           <div
             class="col-lg-2"
@@ -73,7 +74,12 @@
         return store.state.userobject;
       }
     },
-    methods: {},
+    methods: {
+      itemclick(index) {
+        let target = this.userobject[index];
+        this.$router.push({ name: "detailshow", params: { id: target.id } });
+      }
+    },
     mounted() {
       let user = JSON.parse(window.localStorage.getItem("user"));
       return axios

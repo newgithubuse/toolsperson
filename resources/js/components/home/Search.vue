@@ -17,7 +17,7 @@
         style="padding: 5px 15px"
         v-else
       >
-        <div class="card-deck">
+        <div class="card-deck displaycenter">
           <div
             class="card"
             v-for="(item,index) in typetitle"
