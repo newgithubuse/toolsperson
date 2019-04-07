@@ -9,6 +9,7 @@ return [
         'submit' => [
             'success' => '刊登成功',
             'failed' =>  '刊登失敗', 
+            'notexist' => '使用者不存在',
         ],
         'get' => [
             'success' => '取得成功',

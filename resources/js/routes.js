@@ -40,6 +40,12 @@ export default [
                 name: 'profile',
                 component: require('@/components/home/Profile.vue').default,
                 meta: { requireAuth: false }
+            },
+            {
+                path: '/history',
+                name: 'history',
+                component: require('@/components/home/History.vue').default,
+                meta: {requireAuth:false}
             }
         ]
     },

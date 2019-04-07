@@ -19,6 +19,10 @@ export const LoginStatus = (context, status) => {
         context.commit('loginstatus', false)
     }
 }
-export const updateUserProfile = (context, status) => {
-    context.commit('updateuserprofile', status)
+export const updateUserProfile = (context, data) => {
+    context.commit('updateuserprofile', data)
+}
+
+export const getUserObject = (context, data) => {
+    context.commit('getuserobject', data)
 }
