@@ -45,17 +45,18 @@ class UserController
 		try {
 			Log::info('$request => ' . print_r(json_encode($request->all()),true));			
 			$user = User::where('email', $request->email)->firstOrFail();
-			UserPostEvent::create([
+			$userPostEvent = UserPostEvent::create([
 				'user_id' => $user->id,
 				'name' => $user->name,
 				'title' => $request->title,
 				'text' => $request->text,
 				'detail' => $request->detail,
-				'img' => $request->img,				
+				'img' => $request->img,
+				'footer' => $request->footer,		
 				'createdatetime' => $request->createdatetime,
 			]);			
 			$this->response->setInfo('SUCCESS', config('responsecode.user.submit.success'), trans('responsecode.user.submit.success') );
-			return $this->response->success($request->all());			
+			return $this->response->success($userPostEvent);			
 		} catch(ModelNotFoundException $e){
 			Log::error('error :' . $e);
 			$this->response->setInfo('FAILED', config('responsecode.user.submit.notexist'), trans('responsecode.user.submit.notexist'));
