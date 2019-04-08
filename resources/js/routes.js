@@ -3,7 +3,7 @@ export default [
         path: '/',
         name: 'home',
         component: require('@/components/Home.vue').default,
-        meta: { requireAuth: true },
+        meta: { requireAuth: false },
         children: [
             {
                 path: '/login',
