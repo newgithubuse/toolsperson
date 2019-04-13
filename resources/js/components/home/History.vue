@@ -9,20 +9,31 @@
           class="row item mb bottomborderstyle"
           v-for="(item,index) in userobject"
           :key=index
-          @click="itemclick(index)"
         >
           <div
             class="col-lg-2"
             style="overflow:hidden"
+            @click="itemclick(index)"
           >
             <img
               :src="item.img"
               alt=""
             >
           </div>
-          <div class="col-lg-10 itemtextdisplay">
+          <div
+            class="col-lg-7 itemtextdisplay"
+            @click="itemclick(index)"
+          >
             <h3>{{item.title}}</h3>
             <h4>{{item.text}}</h4>
+          </div>
+          <div class="col-lg-3 displayallcenter">
+            <button
+              type="submit"
+              class="btn btn-primary mb"
+              style="height:50px;display:block"
+              @click="registrationcheck(index)"
+            >查看報名者</button>
           </div>
         </div>
       </div>
@@ -43,6 +54,12 @@
     line-height: 80px;
     box-sizing: border-box;
     border-bottom: 1px solid #dee2e6;
+  }
+  .displayallcenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .displaycenter {
     display: flex;
@@ -78,6 +95,13 @@
       itemclick(index) {
         let target = this.userobject[index];
         this.$router.push({ name: "detailshow", params: { id: target.id } });
+      },
+      registrationcheck(index) {
+        let target = this.userobject[index];
+        this.$router.push({
+          name: "registrationuser",
+          params: { id: target.id }
+        });
       }
     },
     mounted() {
