@@ -97,7 +97,8 @@ class UserController
 	}
 	
 	public function getRegistrationUser(Request $request, $id){
-		try {			
+		try {
+			Log::info('$request => ' . print_r($request->all(),true));
 			$user = User::where('email', $request->email)->firstOrFail();		
 			$userpost = UserPostEvent::where('id', $id)->firstOrFail();
 			if($user->id != $userpost->user_id) {

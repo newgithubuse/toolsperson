@@ -5,7 +5,22 @@
     </h1>
     <div class="row">
       <div class="col-12 itemdisplay">
-
+        <div
+          class="row item mb bottomborderstyle"
+          v-for="(item,index) in username"
+          :key=index
+        >
+          <div class="col-lg-9 itemtextdisplay">
+            <h3>{{item.name}}</h3>
+          </div>
+          <div class="col-lg-3 displayallcenter">
+            <button
+              type="submit"
+              class="btn btn-primary mb"
+              style="height:50px;display:block"
+            >確認</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -50,9 +65,32 @@
 <script>
   import store from "@/store";
   export default {
+    data() {
+      return {
+        username: []
+      };
+    },
     computed: {},
     methods: {},
-    mounted() {}
+    mounted() {
+      let user = JSON.parse(window.localStorage.getItem("user"));
+      axios
+        .get("v1/user/registration/get/" + this.$route.params.id, {
+          params: {
+            email: user.email
+          }
+        })
+        .then(response => {
+          let res = response.data;
+          console.log(res);
+          if (res.code == 1) {
+            this.username = res.data;
+          } else {
+            alert(res.msg);
+          }
+        })
+        .catch(err => {});
+    }
   };
 </script>
 
