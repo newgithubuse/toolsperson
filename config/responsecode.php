@@ -35,6 +35,11 @@ return [
         'get' => [
             'success' => 1,
             'failed' => -1,
+        ],
+        'registration' => [
+            'success' => 1,
+            'failed' => -1,
+            'registered' => -2,
         ]
     ]
 ];

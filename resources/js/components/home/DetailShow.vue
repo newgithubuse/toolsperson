@@ -31,7 +31,10 @@
     </div>
     <div class="row mb">
       <div class="col-12 displaycenter">
-        <button class="btn btn-primary">報名委託</button>
+        <button
+          class="btn btn-primary"
+          @click="submitRegistration"
+        >報名委託</button>
       </div>
     </div>
   </div>
@@ -70,7 +73,23 @@
         });
       }
     },
-    methods: {},
+    methods: {
+      submitRegistration() {
+        let user = JSON.parse(window.localStorage.getItem("user"));
+        axios
+          .post("v1/public/registration/" + this.content.id, {
+            email: user.email
+          })
+          .then(res => {
+            console.log(res);
+            alert(res.data.msg);
+          })
+          .catch(err => {
+            console.log("post失敗");
+            console.log(err);
+          });
+      }
+    },
     mounted() {}
   };
 </script>
