@@ -39,6 +39,12 @@ export const mutations = {
     },
     updateuserprofile(state, data) {
         state.user = data
+        let tmp = state.contents.filter(item => {
+            return item.user_id == data.id
+        })
+        tmp.forEach(item => {
+            item.name = data.name
+        })
     },
     getuserobject(state, data) {
         state.userobject = data.reverse()
