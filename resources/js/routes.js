@@ -46,6 +46,12 @@ export default [
                 name: 'history',
                 component: require('@/components/home/History.vue').default,
                 meta: {requireAuth:false}
+            },
+            {
+                path: '/registrationuser/:id',
+                name: 'registrationuser',
+                component: require('@/components/home/RegistrationUserShow.vue').default,
+                meta: {requireAuth:false}
             }
         ]
     },
