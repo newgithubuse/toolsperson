@@ -10,6 +10,9 @@ Route::group(['prefix' => 'user'], function() {
     Route::group(['prefix' => 'profile'], function() {
         Route::patch('update', 'UserController@update');
     });
+    Route::group(['prefix' => 'registration'], function() {
+        Route::get('get/{id}', "UserController@getRegistrationUser");
+    });
 });
 
 Route::group(['prefix' => 'auth'], function() {
