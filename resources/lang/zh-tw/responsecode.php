@@ -35,6 +35,11 @@ return [
         'get' => [
             'success' => '取得成功',
             'failed' => '取得失敗',
+        ],
+        'registration' => [
+            'success' => '報名成功',
+            'failed' => '報名失敗',
+            'registered' => '已報名此刊登',
         ]
     ]
 ];

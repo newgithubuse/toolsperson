@@ -20,4 +20,5 @@ Route::group(['prefix' => 'auth'], function() {
 });
 Route::group(['prefix' => 'public'], function() {
     Route::get('get', 'PublicController@getAllPostEvent');
+    Route::post('registration/{id}', 'PublicController@registrationEvent' );
 });

@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('phone')->default('');
+            $table->string('expertise')->default('');
             $table->tinyInteger('status')->default(1)->comment('0 => 停用, 1 => 正常');
             $table->rememberToken();
             $table->timestamps();
