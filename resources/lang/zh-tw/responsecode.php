@@ -18,6 +18,10 @@ return [
         'update' => [
             'success' => '更新成功',
             'failed' => '更新失敗',
+        ],
+        'getregistration' => [
+            'success' => '取得成功',
+            'failed' => '取得失敗',
         ]
     ],
     'auth' => [

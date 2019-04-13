@@ -5,6 +5,7 @@ namespace App\Http\v1\Controllers;
 use Exception;
 use App\Models\User;
 use App\Models\UserPostEvent;
+use App\Models\RegistrationForm;
 use App\Exceptions\UserException;
 use App\Http\v1\Responses\Response;
 use Illuminate\Support\Facades\Log;
@@ -91,6 +92,28 @@ class UserController
 		} catch(Exception $e) {
 			Log::error('error :' . $e);
 			$this->response->setInfo('FAILED', config('responsecode.user.update.failed'), trans('responsecode.user.update.failed') );
+		}
+		return $this->response->failed();		
+	}
+	
+	public function getRegistrationUser(Request $request, $id){
+		try {			
+			$user = User::where('email', $request->email)->firstOrFail();		
+			$userpost = UserPostEvent::where('id', $id)->firstOrFail();
+			if($user->id != $userpost->user_id) {
+				throw new Exception;
+			}
+			$registrationsUser = RegistrationForm::where('event_id', $id)->get();			
+			$userlist = collect([]);
+			$registrationsUser->each(function($registrationUser) use (&$userlist){											 
+					$user = User::where('id', $registrationUser->user_id)->first();
+					$userlist->push(['name' => $user->name]);					
+			});
+			$this->response->setInfo('SUCCESS', config('responsecode.user.getregistration.success'), trans('responsecode.user.getregistration.success') );
+			return $this->response->success($userlist);			
+		} catch(Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.user.getregistration.failed'), trans('responsecode.user.getregistration.failed') );
 		}
 		return $this->response->failed();		
 	}

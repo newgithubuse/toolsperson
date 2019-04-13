@@ -18,6 +18,10 @@ return [
         'update' => [
             'success' => 1,
             'failed' => -1,
+        ],
+        'getregistration' => [
+            'success' => 1,
+            'failed' => -1,
         ]
     ],
     'auth' => [
