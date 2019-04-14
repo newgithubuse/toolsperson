@@ -12,6 +12,7 @@ Route::group(['prefix' => 'user'], function() {
     });
     Route::group(['prefix' => 'registration'], function() {
         Route::get('get/{id}', "UserController@getRegistrationUser");
+        Route::post('update/{id}', "UserController@updateRegistrationStatus");
     });
 });
 

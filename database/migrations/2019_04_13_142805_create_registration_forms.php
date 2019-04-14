@@ -17,6 +17,7 @@ class CreateRegistrationForms extends Migration
             $table->increments('id');
             $table->integer('user_id')->default(0);
             $table->integer('event_id')->default(0);
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }
