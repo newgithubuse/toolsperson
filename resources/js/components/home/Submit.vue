@@ -87,7 +87,7 @@
     justify-content: center;
   }
   .btn-primary {
-    width: 60%;
+    width: 80%;
   }
   .btn_light {
     width: 80%;
