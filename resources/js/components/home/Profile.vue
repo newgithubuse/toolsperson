@@ -40,6 +40,7 @@
             <div
               class="inlineblock"
               v-show="!modifyStatus"
+              style="overflow-x: scroll"
             >{{user.email}}</div>
             <div class="inlineblock">
               <input

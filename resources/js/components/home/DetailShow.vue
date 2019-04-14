@@ -34,7 +34,13 @@
         <button
           class="btn btn-primary"
           @click="submitRegistration"
+          v-if="other"
         >報名委託</button>
+        <button
+          class="btn btn-primary"
+          @click="updatesubmit"
+          v-else
+        >修改刊登內容</button>
       </div>
     </div>
   </div>
@@ -71,6 +77,14 @@
         return this.$store.state.contents.find(item => {
           return item.id == this.$route.params.id;
         });
+      },
+      other() {
+        let user = JSON.parse(window.localStorage.getItem("user"));
+        if (user.id == this.content.user_id) {
+          return false;
+        } else {
+          return true;
+        }
       }
     },
     methods: {
@@ -88,6 +102,9 @@
             console.log("post失敗");
             console.log(err);
           });
+      },
+      updatesubmit() {
+        console.log("updatedata");
       }
     },
     mounted() {}
