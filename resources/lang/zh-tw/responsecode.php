@@ -26,6 +26,7 @@ return [
         'updateregistration' => [
             'success' => '確認成功',
             'failed' => '確認失敗',
+            'exist' => '已確認成功',
         ]
     ],
     'auth' => [
