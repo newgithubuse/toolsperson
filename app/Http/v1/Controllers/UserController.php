@@ -108,13 +108,35 @@ class UserController
 			$userlist = collect([]);
 			$registrationsUser->each(function($registrationUser) use (&$userlist){											 
 					$user = User::where('id', $registrationUser->user_id)->first();
-					$userlist->push(['name' => $user->name]);					
+					$userlist->push([
+						'id' => $user->id,
+						'name' => $user->name
+					]);					
 			});
 			$this->response->setInfo('SUCCESS', config('responsecode.user.getregistration.success'), trans('responsecode.user.getregistration.success') );
 			return $this->response->success($userlist);			
 		} catch(Exception $e) {
 			Log::error('error :' . $e);
 			$this->response->setInfo('FAILED', config('responsecode.user.getregistration.failed'), trans('responsecode.user.getregistration.failed') );
+		}
+		return $this->response->failed();		
+	}
+
+	public function updateRegistrationStatus(Request $request, $id)
+	{
+		try {
+			$registration = RegistrationForm::where('event_id', $id)->where('user_id', $request->id)->firstOrFailed();
+			$userpost = UserPostEvent::where('id', $id)->firstOrFail();
+			$user = User::where('email', $request->email)->firstOrFailed();
+			if($user->id != $userpost->user_id) {
+				throw new Exception;
+			}
+			$registration->update(['status' => 1]);
+			$this->response->setInfo('SUCCESS', config('responsecode.user.updateregistration.success'), trans('responsecode.user.updateregistration.success') );
+			return $this->response->success();			
+		} catch(Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.user.updateregistration.failed'), trans('responsecode.user.updateregistration.failed') );
 		}
 		return $this->response->failed();		
 	}

@@ -22,6 +22,10 @@ return [
         'getregistration' => [
             'success' => '取得成功',
             'failed' => '取得失敗',
+        ],
+        'updateregistration' => [
+            'success' => '確認成功',
+            'failed' => '確認失敗',
         ]
     ],
     'auth' => [

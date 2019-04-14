@@ -22,6 +22,10 @@ return [
         'getregistration' => [
             'success' => 1,
             'failed' => -1,
+        ],
+        'updateregistration' => [
+            'success' => 1,
+            'failed' => -1,
         ]
     ],
     'auth' => [
