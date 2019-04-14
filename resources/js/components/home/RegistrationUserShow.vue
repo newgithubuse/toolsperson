@@ -10,14 +10,15 @@
           v-for="(item,index) in username"
           :key=index
         >
-          <div class="col-lg-9 itemtextdisplay">
+          <div class="col-lg-9  itemtextdisplay">
             <h3>{{item.name}}</h3>
           </div>
-          <div class="col-lg-3 displayallcenter">
+          <div class="col-lg-3  displayallcenter">
             <button
               type="submit"
               class="btn btn-primary mb"
               style="height:50px;display:block"
+              @click="comfirmuser(index)"
             >確認</button>
           </div>
         </div>
@@ -39,6 +40,11 @@
     line-height: 80px;
     box-sizing: border-box;
     border-bottom: 1px solid #dee2e6;
+  }
+  .displayallcenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .displaycenter {
     display: flex;
@@ -71,7 +77,29 @@
       };
     },
     computed: {},
-    methods: {},
+    methods: {
+      comfirmuser(index) {
+        let user = JSON.parse(window.localStorage.getItem("user"));
+        let regisuser = this.username[index];
+        axios
+          .post("v1/user/registration/update/" + this.$route.params.id, {
+            email: user.email,
+            id: regisuser.id
+          })
+          .then(response => {
+            let res = response.data;
+            if (res.code == 1) {
+              alert(res.msg);
+            } else {
+              alert(res.msg);
+            }
+          })
+          .catch(err => {
+            console.log("post失敗");
+            console.log(err);
+          });
+      }
+    },
     mounted() {
       let user = JSON.parse(window.localStorage.getItem("user"));
       axios
@@ -82,7 +110,6 @@
         })
         .then(response => {
           let res = response.data;
-          console.log(res);
           if (res.code == 1) {
             this.username = res.data;
           } else {

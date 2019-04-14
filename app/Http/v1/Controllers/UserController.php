@@ -125,15 +125,21 @@ class UserController
 	public function updateRegistrationStatus(Request $request, $id)
 	{
 		try {
-			$registration = RegistrationForm::where('event_id', $id)->where('user_id', $request->id)->firstOrFailed();
+			$registration = RegistrationForm::where('event_id', $id)->where('user_id', $request->id)->firstOrFail();
 			$userpost = UserPostEvent::where('id', $id)->firstOrFail();
-			$user = User::where('email', $request->email)->firstOrFailed();
+			$user = User::where('email', $request->email)->firstOrFail();
 			if($user->id != $userpost->user_id) {
 				throw new Exception;
+			}			
+			if($registration->status ==1 ){
+				throw new UserException(trans('responsecode.user.updateregistration.exist'), config('responsecode.user.updateregistration.exist'));
 			}
 			$registration->update(['status' => 1]);
 			$this->response->setInfo('SUCCESS', config('responsecode.user.updateregistration.success'), trans('responsecode.user.updateregistration.success') );
 			return $this->response->success();			
+		} catch(UserException $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', $e->getCode(), $e->getMessage());
 		} catch(Exception $e) {
 			Log::error('error :' . $e);
 			$this->response->setInfo('FAILED', config('responsecode.user.updateregistration.failed'), trans('responsecode.user.updateregistration.failed') );
