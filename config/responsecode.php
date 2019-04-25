@@ -27,6 +27,10 @@ return [
             'success' => 1,
             'failed' => -1,
             'exist' => -2,
+        ],
+        'getregistrationhistory' => [
+            'success' => 1,
+            'failed' => -1,
         ]
     ],
     'auth' => [
