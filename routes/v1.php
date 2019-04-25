@@ -11,6 +11,7 @@ Route::group(['prefix' => 'user'], function() {
         Route::patch('update', 'UserController@update');
     });
     Route::group(['prefix' => 'registration'], function() {
+        Route::get('history', "UserController@getRegistrationHistory");
         Route::get('get/{id}', "UserController@getRegistrationUser");
         Route::post('update/{id}', "UserController@updateRegistrationStatus");
     });

@@ -27,6 +27,10 @@ return [
             'success' => '確認成功',
             'failed' => '確認失敗',
             'exist' => '已確認成功',
+        ],
+        'getregistrationhistory' => [
+            'success' => '取得成功',
+            'failed' => "取得失敗",
         ]
     ],
     'auth' => [

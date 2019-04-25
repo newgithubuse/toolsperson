@@ -146,4 +146,28 @@ class UserController
 		}
 		return $this->response->failed();		
 	}
+	public function getRegistrationHistory(Request $request)
+	{
+		try {
+			$user = User::where('email', $request->email)->firstOrFail();			
+			$registrations = RegistrationForm::where('user_id', $user->id)->get();
+			$fetchRegistration = collect();
+			$registrations->each(function($registration) use ($fetchRegistration) {
+				$post = UserPostEvent::where('id', $registration->event_id)->firstOrFail();
+				$postUser = User::where('id', $post->user_id)->firstOrFail();
+				$fetchRegistration->push([
+					'name' => $postUser->name,
+					'title' => $post->title,
+					'text' => $post->text,
+					'img' => $post->img,
+				]);
+			});		
+			$this->response->setInfo('SUCCESS', config('responsecode.user.getregistrationhistory.success'), trans('responsecode.user.getregistrationhistory.success') );
+			return $this->response->success($fetchRegistration);			
+		} catch(Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.user.getregistrationhistory.failed'), trans('responsecode.user.getregistrationhistory.failed') );
+		}
+		return $this->response->failed();		
+	}
 }
