@@ -31,6 +31,10 @@ return [
         'getregistrationhistory' => [
             'success' => 1,
             'failed' => -1,
+        ],
+        'deleteregistration' => [
+            'success' => 1,
+            'failed' => -1,
         ]
     ],
     'auth' => [
