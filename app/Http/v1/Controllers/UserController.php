@@ -156,6 +156,7 @@ class UserController
 				$post = UserPostEvent::where('id', $registration->event_id)->firstOrFail();
 				$postUser = User::where('id', $post->user_id)->firstOrFail();
 				$fetchRegistration->push([
+					'id' => $registration->id,
 					'name' => $postUser->name,
 					'title' => $post->title,
 					'text' => $post->text,
@@ -180,7 +181,7 @@ class UserController
 			}
 			$registration->delete();
 			$this->response->setInfo('SUCCESS', config('responsecode.user.deleteregistration.success'), trans('responsecode.user.deleteregistration.success') );
-			return $this->response->success();			
+			return $this->response->success(['id' => $id]);			
 		} catch(Exception $e) {
 			Log::error('error :' . $e);
 			$this->response->setInfo('FAILED', config('responsecode.user.deleteregistration.failed'), trans('responsecode.user.deleteregistration.failed') );
