@@ -170,4 +170,21 @@ class UserController
 		}
 		return $this->response->failed();		
 	}
+
+	public function deleteRegistration($id)
+	{
+		try {			
+			$registration = RegistrationForm::find($id);
+			if(!$registration) {
+				throw new Exception;
+			}
+			$registration->delete();
+			$this->response->setInfo('SUCCESS', config('responsecode.user.deleteregistration.success'), trans('responsecode.user.deleteregistration.success') );
+			return $this->response->success();			
+		} catch(Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.user.deleteregistration.failed'), trans('responsecode.user.deleteregistration.failed') );
+		}
+		return $this->response->failed();		
+	}
 }

@@ -14,6 +14,7 @@ Route::group(['prefix' => 'user'], function() {
         Route::get('history', "UserController@getRegistrationHistory");
         Route::get('get/{id}', "UserController@getRegistrationUser");
         Route::post('update/{id}', "UserController@updateRegistrationStatus");
+        Route::delete('delete/{id}', "UserController@deleteRegistration");
     });
 });
 

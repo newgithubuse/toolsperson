@@ -31,6 +31,10 @@ return [
         'getregistrationhistory' => [
             'success' => '取得成功',
             'failed' => "取得失敗",
+        ],
+        'deleteregistration' => [
+            'success' => '已取消報名',
+            'failed' => '取消失敗',
         ]
     ],
     'auth' => [
