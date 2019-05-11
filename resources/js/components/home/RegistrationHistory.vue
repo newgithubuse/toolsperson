@@ -30,6 +30,7 @@
                 type="submit"
                 class="btn btn-primary mb"
                 style="height:50px;display:block"
+                @click="cancelregistration(item.id)"
               >
                 取消報名
               </button>
@@ -96,13 +97,25 @@
 <script>
   import store from "@/store";
   export default {
-    data() {
-      return {
-        history: []
-      };
+    computed: {
+      history() {
+        return store.state.registrationhistory;
+      }
     },
-    computed: {},
-    methods: {},
+    methods: {
+      cancelregistration(id) {
+        axios
+          .delete("v1/user/registration/delete/" + id)
+          .then(response => {
+            let res = response.data;
+            this.$store.dispatch("deleteRegistration", res.data.id);
+          })
+          .catch(err => {
+            console.log("取消失敗");
+            console.log(err);
+          });
+      }
+    },
     mounted() {
       let user = JSON.parse(window.localStorage.getItem("user"));
       return axios
@@ -114,7 +127,7 @@
         .then(response => {
           let res = response.data;
           if (res.code == 1) {
-            this.history = res.data;
+            this.$store.dispatch("getRegistrationHistory", res.data);
           } else {
             alert(res.msg);
           }

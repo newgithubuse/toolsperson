@@ -4,7 +4,8 @@ export const state = {
     contents: [],
     user: [],
     userobject: [],
-    loginstatus: false
+    loginstatus: false,
+    registrationhistory: []
 }
 
 export const mutations = {
@@ -48,5 +49,16 @@ export const mutations = {
     },
     getuserobject(state, data) {
         state.userobject = data.reverse()
+    },
+    getregistrationhistory(state, data) {
+        state.registrationhistory = data
+    },
+    deleteregistration(state, data) {
+        for (let i = 0; i < state.registrationhistory.length; i++) {
+            if (state.registrationhistory[i].id == data) {
+                state.registrationhistory.splice(i, 1)
+                break
+            }
+        }
     }
 }
