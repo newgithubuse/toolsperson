@@ -28,6 +28,7 @@
               class="card-img-top"
               :src="item.img"
               alt="Card image cap"
+              style="width:300px;height:150px"
             >
             <div class="card-body">
               <h5 class="card-title">{{item.title}}</h5>
