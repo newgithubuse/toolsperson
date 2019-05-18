@@ -7,6 +7,7 @@ Route::group(['prefix' => 'user'], function() {
     Route::post('registered', 'UserController@registered');
     Route::post('submit', 'UserController@submitObject');    
     Route::get('get', 'UserController@getPostEvent');
+    Route::patch('update/{id}', 'UserController@updateObject');
     Route::group(['prefix' => 'profile'], function() {
         Route::patch('update', 'UserController@update');
     });

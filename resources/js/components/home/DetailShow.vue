@@ -6,27 +6,72 @@
     <div class="row mb">
 
       <div class="col-8">
-        <h2>{{content.title}}</h2>
+        <h2 v-if="!update">{{content.title}}</h2>
+        <div
+          v-else
+          class="displaycolumn"
+        >
+          <label>標題</label>
+          <input
+            type="text"
+            v-model="input.title"
+          >
+        </div>
+
       </div>
 
       <div class="col-4 displayaligncenter">刊登者 : {{content.name}}</div>
     </div>
     <div class="row mb">
       <div class="col-7 displayaligncenter">
-        <h3>{{content.text}}</h3>
+        <h3 v-if="!update">{{content.text}}</h3>
+        <div
+          v-else
+          class="displaycolumn"
+        >
+          <label>內容</label>
+          <input
+            type="text"
+            v-model="input.text"
+          >
+        </div>
       </div>
       <div class="col-5 imgdiv">
         <img
           :src="content.img"
           alt=""
+          v-if="!update"
         >
+        <div
+          v-else
+          class="displaycolumn"
+        >
+          <label>圖片網址</label>
+          <input
+            type="text"
+            v-model="input.img"
+          >
+        </div>
       </div>
     </div>
     <div class="row mb">
       <div class="col-12">
-        <h5>
+        <h5 v-if="!update">
           {{content.detail}}
         </h5>
+        <div
+          v-else
+          class="displaycolumn"
+        >
+          <label>詳細內容</label>
+          <textarea
+            v-model="input.detail"
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+          ></textarea>
+        </div>
       </div>
     </div>
     <div class="row mb">
@@ -36,11 +81,36 @@
           @click="submitRegistration"
           v-if="other"
         >報名委託</button>
-        <button
-          class="btn btn-primary"
-          @click="updatesubmit"
+        <div
           v-else
-        >修改刊登內容</button>
+          class="row"
+        >
+          <button
+            class="btn btn-primary"
+            @click="updatesubmit"
+            v-if="!update"
+          >修改刊登內容</button>
+          <div
+            v-else
+            class="col-12"
+          >
+            <div class="row">
+              <div class="col-6">
+                <button
+                  class="btn btn-primary"
+                  @click="updateObject"
+                >更新</button>
+              </div>
+              <div class="col-6">
+                <button
+                  class="btn btn-light"
+                  @click="cancel"
+                >取消</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -54,6 +124,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  .displaycolumn {
+    display: flex;
+    flex-direction: column;
   }
   .displaycenter {
     display: flex;
@@ -72,6 +146,12 @@
 <script>
   import store from "@/store";
   export default {
+    data() {
+      return {
+        input: { title: "", text: "", detail: "", img: "" },
+        update: false
+      };
+    },
     computed: {
       content() {
         return this.$store.state.contents.find(item => {
@@ -104,7 +184,34 @@
           });
       },
       updatesubmit() {
-        console.log("updatedata");
+        this.update = true;
+      },
+      updateObject() {
+        this.input.email = JSON.parse(window.localStorage.getItem("user")).email;
+        axios
+          .patch("v1/user/update/" + this.$route.params.id, this.input)
+          .then(response => {
+            let res = response.data;
+            if (res.code == 1) {
+              this.$store.dispatch("updateObject", {
+                data: res.data,
+                id: this.$route.params.id
+              });
+              this.update = false;
+              alert(res.msg);
+            } else {
+              this.update = false;
+              alert(res.msg);
+            }
+          })
+          .catch(err => {
+            this.update = false;
+            console.log("patch失敗");
+            console.log(err);
+          });
+      },
+      cancel() {
+        this.update = false;
       }
     },
     mounted() {}
