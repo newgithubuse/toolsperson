@@ -4,7 +4,7 @@
       <h1 class="displaycenter">會員刊登</h1>
       <div class="displaycenter">
         <div class="form-group col-7 ">
-          <label for="email">標題</label>
+          <label>標題</label>
           <input
             type="input"
             class="form-control"
@@ -16,7 +16,7 @@
       </div>
       <div class="displaycenter">
         <div class="form-group col-7 ">
-          <label for="email">內容</label>
+          <label>內容</label>
           <input
             type="input"
             class="form-control"
@@ -28,7 +28,7 @@
       </div>
       <div class="displaycenter">
         <div class="form-group col-7 ">
-          <label for="email">詳細內容敘述</label>
+          <label>詳細內容敘述</label>
           <textarea
             class="form-control"
             id="exampleFormControlTextarea1"
@@ -40,7 +40,7 @@
       </div>
       <div class="displaycenter">
         <div class="form-group col-7 ">
-          <label for="email">圖片網址</label>
+          <label>圖片網址</label>
           <input
             type="input"
             class="form-control"
@@ -87,7 +87,7 @@
     justify-content: center;
   }
   .btn-primary {
-    width: 60%;
+    width: 80%;
   }
   .btn_light {
     width: 80%;

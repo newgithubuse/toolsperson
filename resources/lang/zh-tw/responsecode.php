@@ -18,6 +18,31 @@ return [
         'update' => [
             'success' => '更新成功',
             'failed' => '更新失敗',
+        ],
+        'getregistration' => [
+            'success' => '取得成功',
+            'failed' => '取得失敗',
+        ],
+        'updateregistration' => [
+            'success' => '確認成功',
+            'failed' => '確認失敗',
+            'exist' => '已確認成功',
+        ],
+        'getregistrationhistory' => [
+            'success' => '取得成功',
+            'failed' => "取得失敗",
+        ],
+        'deleteregistration' => [
+            'success' => '已取消報名',
+            'failed' => '取消失敗',
+        ],
+        'updateobject' => [
+            'success' => '更新成功',
+            'failed' => '更新失敗',
+        ],
+        'checkoutstatus' => [
+            'success' => '成功',
+            'failed' => '失敗'
         ]
     ],
     'auth' => [
@@ -35,6 +60,11 @@ return [
         'get' => [
             'success' => '取得成功',
             'failed' => '取得失敗',
+        ],
+        'registration' => [
+            'success' => '報名成功',
+            'failed' => '報名失敗',
+            'registered' => '已報名此刊登',
         ]
     ]
 ];

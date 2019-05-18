@@ -39,7 +39,11 @@ router.beforeEach((to, from, next) => {
         }
     } else {
         if (to.meta.requireAuth) {
-            next()
+            if (to.name == 'home') {
+                next('/login')
+            } else {
+                next()
+            }
         } else {
             next('/login')
         }

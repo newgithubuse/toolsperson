@@ -84,6 +84,10 @@
                 to="/history"
                 class="dropdown-item textcenter"
               >刊登記錄</router-link>
+              <router-link
+                to="/registration_history"
+                class="dropdown-item textcenter"
+              >報名記錄</router-link>
               <div class="dropdown-divider"></div>
               <a
                 class="dropdown-item textcenter"

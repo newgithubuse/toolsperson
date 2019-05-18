@@ -26,3 +26,15 @@ export const updateUserProfile = (context, data) => {
 export const getUserObject = (context, data) => {
     context.commit('getuserobject', data)
 }
+
+export const getRegistrationHistory = (context, data) => {
+    context.commit('getregistrationhistory', data)
+}
+
+export const deleteRegistration = (context, data) => {
+    context.commit('deleteregistration', data)
+}
+
+export const updateObject = (context, data) => {
+    context.commit('updateobject', data)
+}

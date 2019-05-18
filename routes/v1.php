@@ -7,8 +7,16 @@ Route::group(['prefix' => 'user'], function() {
     Route::post('registered', 'UserController@registered');
     Route::post('submit', 'UserController@submitObject');    
     Route::get('get', 'UserController@getPostEvent');
+    Route::patch('update/{id}', 'UserController@updateObject');
+    Route::get('check/{id}', 'UserController@checkStatus');
     Route::group(['prefix' => 'profile'], function() {
         Route::patch('update', 'UserController@update');
+    });
+    Route::group(['prefix' => 'registration'], function() {
+        Route::get('history', "UserController@getRegistrationHistory");
+        Route::get('get/{id}', "UserController@getRegistrationUser");
+        Route::post('update/{id}', "UserController@updateRegistrationStatus");
+        Route::delete('delete/{id}', "UserController@deleteRegistration");
     });
 });
 
@@ -20,4 +28,5 @@ Route::group(['prefix' => 'auth'], function() {
 });
 Route::group(['prefix' => 'public'], function() {
     Route::get('get', 'PublicController@getAllPostEvent');
+    Route::post('registration/{id}', 'PublicController@registrationEvent' );
 });
