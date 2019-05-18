@@ -43,7 +43,7 @@ return [
         'checkoutstatus' => [
             'success' => 1,
             'failed' => -1
-        ]
+        ],
     ],
     'auth' => [
         'login' => [
@@ -65,6 +65,10 @@ return [
             'success' => 1,
             'failed' => -1,
             'registered' => -2,
+        ],
+        'connectus' => [
+            'success' => 1,
+            'failed' => -1,
         ]
     ]
 ];
