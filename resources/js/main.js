@@ -35,7 +35,11 @@ router.beforeEach((to, from, next) => {
         if (to.name == 'home') {
             next('/search')
         } else {
-            next()
+            if (to.name == 'login' || to.name == 'register') {
+                next('/search')
+            } else {
+                next()
+            }
         }
     } else {
         if (to.meta.requireAuth) {

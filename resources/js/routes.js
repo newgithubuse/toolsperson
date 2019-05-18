@@ -6,6 +6,18 @@ export default [
         meta: { requireAuth: true },
         children: [
             {
+                path: '/publishing',
+                name: 'publishing',
+                component: require('@/components/home/Publishing.vue').default,
+                meta: { requireAuth: true }
+            },
+            {
+                path: '/connection',
+                name: 'connection',
+                component: require('@/components/home/Connection').default,
+                meta: { requireAuth: true }
+            },
+            {
                 path: '/login',
                 name: 'login',
                 component: require('@/components/home/Login.vue').default,
