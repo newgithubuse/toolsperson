@@ -35,6 +35,10 @@ return [
         'deleteregistration' => [
             'success' => 1,
             'failed' => -1,
+        ],
+        'updateobject' => [
+            'success' => 1,
+            'failed' => -1,
         ]
     ],
     'auth' => [

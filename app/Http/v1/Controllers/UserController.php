@@ -68,6 +68,29 @@ class UserController
 		return $this->response->failed();
 	}
 	
+	public function updateObject(Request $request, $id)
+	{
+		try {
+			$user = User::where('email', $request->email)->firstOrFail();
+			$postEvent =  UserPostEvent::find($id);
+			if($user->id != $postEvent->user_id) {
+				throw new Exception;
+			}
+			$postEvent->update([
+				'title' => $request->title ?? $postEvent->title,
+				'text' => $request->text ?? $postEvent->text,
+				'detail' => $request->detail ?? $postEvent->detail,
+				'img' =>  $request->img ?? $postEvent->img
+			]);
+			$this->response->setInfo('SUCCESS', config('responsecode.user.updateobject.success'), trans('responsecode.user.updateobject.success') );
+			return $this->response->success($request->all());			
+		}  catch(Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.user.updateobject.failed'), trans('responsecode.user.updateobject.failed') );
+		}
+		return $this->response->failed();
+	}
+
 	public function getPostEvent(Request $request)
 	{
 		try {

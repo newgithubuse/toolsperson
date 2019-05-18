@@ -60,5 +60,14 @@ export const mutations = {
                 break
             }
         }
+    },
+    updateobject(state, data) {
+        let tmp = state.contents.find(item => {
+            return item.id == data.id
+        })
+        tmp.title = data.data.title ? data.data.title : tmp.title
+        tmp.text = data.data.text ? data.data.text : tmp.text
+        tmp.detail = data.data.detail ? data.data.detail : tmp.detail
+        tmp.img = data.data.img ? data.data.img : tmp.img
     }
 }

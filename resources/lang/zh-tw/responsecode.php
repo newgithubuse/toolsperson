@@ -35,6 +35,10 @@ return [
         'deleteregistration' => [
             'success' => '已取消報名',
             'failed' => '取消失敗',
+        ],
+        'updateobject' => [
+            'success' => '更新成功',
+            'failed' => '更新失敗',
         ]
     ],
     'auth' => [
