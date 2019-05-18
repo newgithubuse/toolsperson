@@ -1,5 +1,4 @@
 <template>
-
   <div class="border">
     <h1 class="displaycenter">
       會員註冊
@@ -152,7 +151,7 @@
     justify-content: center;
   }
   .radio + .radio {
-    margin-left: 50px;
+    margin-left: 30px;
   }
 </style>
 

@@ -37,11 +37,13 @@
         </div>
       </div>
       <div class="col-5 imgdiv">
-        <img
-          :src="content.img"
-          alt=""
-          v-if="!update"
-        >
+        <div v-if="!update">
+          <img
+            :src="content.img"
+            alt=""
+            style="width:300px;height:150px"
+          >
+        </div>
         <div
           v-else
           class="displaycolumn"
