@@ -9,6 +9,7 @@
     >
       <label>訊息內容</label>
       <textarea
+        v-model="input.message"
         placeholder="想對我們說的話..."
         cols="30"
         rows="10"
@@ -16,7 +17,10 @@
       ></textarea>
     </div>
     <div class="displaycenter">
-      <button class="btn btn-primary">傳送</button>
+      <button
+        class="btn btn-primary"
+        @click="submit"
+      >傳送</button>
     </div>
   </div>
 </template>
@@ -41,5 +45,31 @@
 </style>
 <script>
   import store from "@/store";
-  export default {};
+  export default {
+    data() {
+      return {
+        input: {
+          message: ""
+        }
+      };
+    },
+    methods: {
+      submit() {
+        axios
+          .post("v1/public/connectus", this.input)
+          .then(response => {
+            let res = response.data;
+            if (res.code == 1) {
+              alert(res.msg);
+            } else {
+              alert(res.msg);
+            }
+          })
+          .catch(err => {
+            console.log("post失敗");
+            console.log(err);
+          });
+      }
+    }
+  };
 </script>

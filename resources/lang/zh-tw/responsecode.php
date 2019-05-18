@@ -43,7 +43,7 @@ return [
         'checkoutstatus' => [
             'success' => '成功',
             'failed' => '失敗'
-        ]
+        ],
     ],
     'auth' => [
         'login' => [
@@ -65,6 +65,10 @@ return [
             'success' => '報名成功',
             'failed' => '報名失敗',
             'registered' => '已報名此刊登',
+        ],
+        'connectus' => [
+            'success' => '傳送成功',
+            'failed' => '傳送失敗'
         ]
     ]
 ];
