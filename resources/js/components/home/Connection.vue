@@ -61,6 +61,7 @@
             let res = response.data;
             if (res.code == 1) {
               alert(res.msg);
+              this.clear();
             } else {
               alert(res.msg);
             }
@@ -69,6 +70,9 @@
             console.log("post失敗");
             console.log(err);
           });
+      },
+      clear() {
+        this.input.message = "";
       }
     }
   };
