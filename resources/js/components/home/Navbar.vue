@@ -42,16 +42,16 @@
             >登入</router-link>
           </li>
           <li class="nav-item">
-            <a
-              href="#"
+            <router-link
+              to="/publishing"
               class="nav-link textcenter"
-            >刊登辦法</a>
+            >刊登辦法</router-link>
           </li>
           <li class="nav-item">
-            <a
-              href="#"
+            <router-link
+              to="/connection"
               class="nav-link textcenter"
-            >聯絡我們</a>
+            >聯絡我們</router-link>
           </li>
           <li
             class="nav-item dropdown"

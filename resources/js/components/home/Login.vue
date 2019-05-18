@@ -67,7 +67,6 @@
 </style>
 <script>
   import store from "@/store";
-  import { router } from "@/main.js";
   export default {
     data() {
       return {
