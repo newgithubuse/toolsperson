@@ -40,6 +40,7 @@
                 type="submit"
                 class="btn btn-info mb"
                 style="height:50px;display:block"
+                @click="checkstatus(item.id)"
               >
                 查看狀態
               </button>
@@ -112,6 +113,23 @@
           })
           .catch(err => {
             console.log("取消失敗");
+            console.log(err);
+          });
+      },
+      checkstatus(id) {
+        let user = JSON.parse(window.localStorage.getItem("user"));
+        axios
+          .get("v1/user/check/" + id, { params: { email: user.email } })
+          .then(response => {
+            let res = response.data;
+            if (res.code == 1) {
+              alert(res.data);
+            } else {
+              alert(res.msg);
+            }
+          })
+          .catch(err => {
+            console.log("get失敗");
             console.log(err);
           });
       }

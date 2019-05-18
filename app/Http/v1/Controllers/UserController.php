@@ -211,4 +211,21 @@ class UserController
 		}
 		return $this->response->failed();		
 	}
+
+	public function checkStatus(Request $request, $id)
+	{
+		try {			
+			$registration = RegistrationForm::find($id);
+			$user = User::where('email', $request->email)->firstOrFail();		
+			if($user->id != $registration->user_id) {
+				throw new Exception;
+			}			
+			$this->response->setInfo('SUCCESS', config('responsecode.user.checkoutstatus.success'), trans('responsecode.user.checkoutstatus.success') );
+			return $this->response->success($registration->status == 1 ?  '已確認報名請盡速前往目的地' : '使用者尚未確認');			
+		} catch(Exception $e) {
+			Log::error('error :' . $e);
+			$this->response->setInfo('FAILED', config('responsecode.user.checkoutstatus.failed'), trans('responsecode.user.checkoutstatus.failed') );
+		}
+		return $this->response->failed();		
+	}
 }

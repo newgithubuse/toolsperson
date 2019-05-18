@@ -39,6 +39,10 @@ return [
         'updateobject' => [
             'success' => 1,
             'failed' => -1,
+        ],
+        'checkoutstatus' => [
+            'success' => 1,
+            'failed' => -1
         ]
     ],
     'auth' => [
