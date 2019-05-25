@@ -8,7 +8,7 @@
         to="/search"
         class="navbar-brand"
       ><img
-          src="https://picsum.photos/50/50/?random=100"
+          src="../../../img/logo.png"
           alt="logo"
         >&nbsp;&nbsp;&nbsp;校園工具人派遣</router-link>
       <button
