@@ -123,6 +123,7 @@
     text-align: right;
   }
   input {
+    width: 100%;
     border-radius: 5px;
   }
   .h80p {
