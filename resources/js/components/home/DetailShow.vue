@@ -15,6 +15,7 @@
           <input
             type="text"
             v-model="input.title"
+            style="width:80%"
           >
         </div>
 
@@ -23,7 +24,7 @@
       <div class="col-4 displayaligncenter">刊登者 : {{content.name}}</div>
     </div>
     <div class="row mb">
-      <div class="col-7 displayaligncenter">
+      <div class="col-6 displayaligncenter">
         <h3 v-if="!update">{{content.text}}</h3>
         <div
           v-else
@@ -33,11 +34,15 @@
           <input
             type="text"
             v-model="input.text"
+            style="width:100%;"
           >
         </div>
       </div>
-      <div class="col-5 imgdiv">
-        <div v-if="!update">
+      <div class="col-6 ">
+        <div
+          class="imgdiv"
+          v-if="!update"
+        >
           <img
             :src="content.img"
             alt=""
