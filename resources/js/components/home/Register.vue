@@ -119,7 +119,7 @@
                 value=0
                 class="radio"
                 v-model="input.gender"
-              >&nbsp;Female
+              >&nbsp;Male
               <input
                 type="radio"
                 id="Male"
@@ -127,7 +127,7 @@
                 value=1
                 class="radio"
                 v-model="input.gender"
-              >&nbsp;Male
+              >&nbsp;Female
             </div>
           </div>
         </div>

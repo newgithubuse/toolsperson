@@ -17,6 +17,7 @@
             <img
               :src="item.img"
               alt=""
+              style="width:300px;height:150px"
             >
           </div>
           <div class="col-lg-7 itemtextdisplay">
