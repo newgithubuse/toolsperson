@@ -9,14 +9,18 @@
     <div class="displaycenter h80p">
       <div class="form-group col-7 ">
         <div class="row">
-          <div class="col-3">
-            <label>name</label>
+          <div class="col-12">
+            <h3>姓名</h3>
           </div>
-          <div class="col-9">
+        </div>
+        <div class="row">
+          <div class="col-12">
             <div
               class="inlineblock"
               v-show="!modifyStatus"
-            >{{user.name}}</div>
+            >
+              <h5>{{user.name}}</h5>
+            </div>
             <div class="inlineblock">
               <input
                 type="text"
@@ -26,22 +30,24 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
     <div class="displaycenter h80p">
       <div class="form-group col-7">
         <div class="row">
-          <div class="col-3">
-            <label>email</label>
+          <div class="col-12">
+            <h3>信箱</h3>
           </div>
-          <div class="col-9">
+        </div>
+        <div class="row">
+          <div class="col-12">
             <div
               class="inlineblock"
               v-show="!modifyStatus"
-              style="overflow-x: scroll"
-            >{{user.email}}</div>
+            >
+              <h5>{{user.email}}</h5>
+            </div>
             <div class="inlineblock">
               <input
                 type="text"
@@ -57,14 +63,18 @@
     <div class="displaycenter h80p">
       <div class="form-group col-7">
         <div class="row">
-          <div class="col-3">
-            <label>phone</label>
+          <div class="col-12">
+            <h3>電話</h3>
           </div>
-          <div class="col-9">
+        </div>
+        <div class="row">
+          <div class="col-12">
             <div
               class="inlineblock"
               v-show="!modifyStatus"
-            >{{user.phone}}</div>
+            >
+              <h5>{{user.phone}}</h5>
+            </div>
             <div class="inlineblock">
               <input
                 type="text"
@@ -120,7 +130,7 @@
     display: inline-block;
     justify-content: flex-end;
     width: 100%;
-    text-align: right;
+    text-align: left;
   }
   input {
     width: 100%;
